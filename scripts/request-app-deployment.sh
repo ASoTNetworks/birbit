@@ -11,8 +11,8 @@ rcd_app_version=$(jq -r '.version' package.json | sed 's/null//')
 cat <<EOF > "$CONFIG_FILE"
 services:
   cns:
-    restEndpoint: '${CERC_REGISTRY_REST_ENDPOINT:-http://console.laconic.com:1317}'
-    gqlEndpoint: '${CERC_REGISTRY_GQL_ENDPOINT:-http://console.laconic.com:9473/api}'
+    restEndpoint: '${CERC_REGISTRY_REST_ENDPOINT:-http://138.197.130.188:1317}'
+    gqlEndpoint: '${CERC_REGISTRY_GQL_ENDPOINT:-http://138.197.130.188:9473/api}'
     chainId: ${CERC_REGISTRY_CHAIN_ID:-laconic_9000-1}
     gas: 550000
     fees: 200000aphoton
