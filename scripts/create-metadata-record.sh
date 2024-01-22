@@ -18,7 +18,7 @@ jq -c '.[]' "$json_file" | while IFS= read -r item; do
   # Iterate over the key-value pairs dynamically
   echo "$item" | jq -r 'to_entries[] | "\(.key) \(.value)"' | while IFS= read -r line; do
     key=$(echo "$line" | awk '{print $1}')
-    value=$(echo "$line" | awk '{$1=""; print $0}')
+    value=$(echo "$line" | awk '{$1=""; print $0}' | awk '{print "\x27" $0 "\x27"}')
     # write each record with 4 spaces for record.yml formatting
     echo "    $key: $value" >> $output_file
   done
