@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 14
       - name: "Install exiftool"
-      - run: |
+        run: |
           apk update
           apk upgrade
           apk add exiftool
