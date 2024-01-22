@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "@cerc-io/test-progressive-web-app",
+  "name": "@zramsay/birbit",
   "version": "0.1.12",
-  "repository": "https://git.vdb.to/cerc-io/test-progressive-web-app",
+  "repository": "https://git.vdb.to/zramsay/birbit",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
