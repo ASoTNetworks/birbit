@@ -22,6 +22,7 @@ jobs:
           node-version: 14
       - name: "Install exiftool"
         run: |
+          echo "hi hello"
           apt-get update -y
           apt-get upgrade -y
           apt-get install exiftool
