@@ -25,7 +25,7 @@ jobs:
           echo "hi hello"
           apt-get update -y
           apt-get upgrade -y
-          apt-get install exiftool
+          apt-get install exiftool -y
       - name: "Install Yarn"
         run: npm install -g yarn
       - name: "Install registry CLI"
