@@ -22,10 +22,12 @@ jobs:
           node-version: 14
       - name: "Install exiftool"
         run: |
-          echo "hi hello"
           apt-get update -y
           apt-get upgrade -y
           apt-get install exiftool -y
+      - name: "Exiftool Version"
+        run: |
+          exiftool -ver
       - name: "Install Yarn"
         run: npm install -g yarn
       - name: "Install registry CLI"
