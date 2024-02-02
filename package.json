@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@zramsay/birbit",
+  "name": "@mito/birbit",
   "version": "0.1.12",
   "repository": "https://git.vdb.to/zramsay/birbit",
   "scripts": {
