@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 img_rcd_file=record.yaml
+app_deploy_RECORD_FILE=app.yml
 json_file=temp.json
 output_file=output.txt
 CONFIG_FILE=mktemp
@@ -62,9 +63,10 @@ record:
     - trespassing
     - $img_url
   meta:
-$meta_data
 EOF
-
+# the metadata needs massaging in order to be the correct yaml format
+# leaving it out for now
+#$meta_data
 
 
 cat <<EOF > "$CONFIG_FILE"
@@ -103,6 +105,7 @@ fi
 
 #example of a view, constructed seperately
 geojson_url="http://geojson.io/#data=data:text/x-url,https%3A%2F%2Fgist.githubusercontent.com%2Fzramsay%2F7cdcd9f50c1d2930f1aeb9073cae2661%2Fraw%2F63b021eebb72ec2b13f327ba67f585ccf9b0b6e5%2Ftest.geojson"
+
 
 cat <<EOF | sed '/.*: ""$/d' > "$app_deploy_RECORD_FILE"
 record:
