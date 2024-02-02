@@ -4,6 +4,10 @@ img_rcd_file=record.yml
 json_file=temp.json
 output_file=output.txt
 CONFIG_FILE=mktemp
+CERC_IPFS_HOST_ENDPOINT=http://138.197.130.188:5001
+CERC_IPFS_SERVER_ENDPOINT=http://138.197.130.188:8080
+image_file=examples/image.jpeg
+
 
 rm -f $img_rcd_file
 rm -f $json_file
@@ -11,7 +15,7 @@ rm -f $output_file
 rm -f $CONFIG_FILE
 
 # Use exitfool to extract photo metadata
-exiftool examples/image.jpeg -json > $json_file
+exiftool $image_file -json > $json_file
 
 # Iterate over the array using jq
 jq -c '.[]' "$json_file" | while IFS= read -r item; do
@@ -25,7 +29,24 @@ jq -c '.[]' "$json_file" | while IFS= read -r item; do
   done
 done
 
-results=$(cat output.txt)
+meta_data=$(cat output.txt)
+echo "Example image metadata ${meta_data}"
+
+echo "Using IPFS endpoint ${CERC_IPFS_HOST_ENDPOINT}"
+echo "Using IPFS server endpoint ${CERC_IPFS_SERVER_ENDPOINT}"
+ipfs_host_endpoint=${CERC_IPFS_HOST_ENDPOINT}
+ipfs_server_endpoint=${CERC_IPFS_SERVER_ENDPOINT}
+
+# Upload the image to IPFS
+echo "Uploading glob file to ${ipfs_host_endpoint}"
+upload_response=$(curl -X POST -F file=@${image_file} ${ipfs_host_endpoint}/api/v0/add)
+image_cid=$(echo "$upload_response" | grep -o '"Hash":"[^"]*' | sed 's/"Hash":"//')
+
+image_url="${ipfs_server_endpoint}/ipfs/${image_cid}?filename=${image_file}"
+
+echo "Glob file uploaded to IFPS:"
+echo "{ cid: ${image_cid}, filename: ${image_file} }"
+echo "{ url: ${image_url} }"
 
 cat <<EOF > "$img_rcd_file"
 record:
@@ -38,8 +59,9 @@ record:
     - golden
     - pheasant
     - trespassing
+    - $img_url
   meta:
-$results
+$meta_data
 EOF
 
 cat <<EOF > "$CONFIG_FILE"
@@ -54,6 +76,6 @@ EOF
 
 cat $img_rcd_file
 
-RECORD_ID=$(laconic -c $CONFIG_FILE cns record publish --filename $img_rcd_file --user-key "${CERC_REGISTRY_USER_KEY}" --bond-id ${CERC_REGISTRY_BOND_ID} | jq -r '.id')
-echo $RECORD_ID
+IMG_RECORD_ID=$(laconic -c $CONFIG_FILE cns record publish --filename $img_rcd_file --user-key "${CERC_REGISTRY_USER_KEY}" --bond-id ${CERC_REGISTRY_BOND_ID} | jq -r '.id')
+echo $IMG_RECORD_ID
 
