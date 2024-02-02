@@ -6,7 +6,7 @@ json_file=temp.json
 output_file=output.txt
 CONFIG_FILE=mktemp
 CERC_IPFS_HOST_ENDPOINT=http://138.197.130.188:5001
-CERC_IPFS_SERVER_ENDPOINT=http://138.197.130.188:33125
+CERC_IPFS_SERVER_ENDPOINT=http://138.197.130.188:33597
 image_file=examples/image.jpeg
 
 
@@ -61,7 +61,7 @@ record:
     - golden
     - pheasant
     - trespassing
-    - $img_url
+    - ${image_url}
   meta:
 EOF
 # the metadata needs massaging in order to be the correct yaml format
@@ -82,6 +82,8 @@ EOF
 cat $img_rcd_file
 
 IMG_RECORD_ID=$(laconic -c $CONFIG_FILE cns record publish --filename $img_rcd_file --user-key "${CERC_REGISTRY_USER_KEY}" --bond-id ${CERC_REGISTRY_BOND_ID} | jq -r '.id')
+
+echo "img rcd id"
 echo $IMG_RECORD_ID
 
 ###########
@@ -117,7 +119,7 @@ record:
   deployment: "$CERC_REGISTRY_DEPLOYMENT_CRN"
   config:
     env:
-      CERC_TEST_WEBAPP_CONFIG1: "$imge_url"
+      CERC_TEST_WEBAPP_CONFIG1: "$image_url"
       CERC_TEST_WEBAPP_CONFIG2: "$geojson_url"
       CERC_WEBAPP_DEBUG: "$rcd_app_version"
   meta:
@@ -127,5 +129,6 @@ record:
 EOF
 
 cat $app_deploy_RECORD_FILE
+
 APP_RECORD_ID=$(laconic -c $CONFIG_FILE cns record publish --filename $app_deploy_RECORD_FILE --user-key "${CERC_REGISTRY_USER_KEY}" --bond-id ${CERC_REGISTRY_BOND_ID} | jq -r '.id')
 echo $APP_RECORD_ID
