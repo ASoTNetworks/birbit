@@ -63,6 +63,7 @@ record:
     - trespassing
     - ${image_url}
   meta:
+    note: "test"
 EOF
 # the metadata needs massaging in order to be the correct yaml format
 # leaving it out for now
