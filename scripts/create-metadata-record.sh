@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-img_rcd_file=record.yml
+img_rcd_file=record.yaml
 json_file=temp.json
 output_file=output.txt
 CONFIG_FILE=mktemp
 CERC_IPFS_HOST_ENDPOINT=http://138.197.130.188:5001
-CERC_IPFS_SERVER_ENDPOINT=http://138.197.130.188:8080
+CERC_IPFS_SERVER_ENDPOINT=http://138.197.130.188:33125
 image_file=examples/image.jpeg
 
 
