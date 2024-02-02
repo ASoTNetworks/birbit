@@ -38,5 +38,5 @@ jobs:
         uses: dcarbone/install-jq-action@v2.1.0
       - name: "Create Metadata Record"
         run: scripts/create-metadata-record.sh
-      - name: "Request Deployment"
-        run: scripts/request-app-deployment.sh
+          #- name: "Request Deployment"
+        #run: scripts/request-app-deployment.sh
