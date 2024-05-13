@@ -20,11 +20,11 @@ rcd_app_version=$(jq -r '.version' package.json | sed 's/null//')
 cat <<EOF > "$CONFIG_FILE"
 services:
   cns:
-    restEndpoint: '${CERC_REGISTRY_REST_ENDPOINT:-http://console.laconic.com:1317}'
-    gqlEndpoint: '${CERC_REGISTRY_GQL_ENDPOINT:-http://console.laconic.com:9473/api}'
+    restEndpoint: '${CERC_REGISTRY_REST_ENDPOINT:-http://23.111.69.218:1317}'
+    gqlEndpoint: '${CERC_REGISTRY_GQL_ENDPOINT:-https://lx-daemon.audubon.app/api}'
     chainId: ${CERC_REGISTRY_CHAIN_ID:-laconic_9000-1}
-    gas: 550000
-    fees: 200000aphoton
+    gas: 9550000
+    fees: 500000aphoton
 EOF
 
 next_ver=$(laconic -c $CONFIG_FILE cns record list --type ApplicationRecord --all --name "$rcd_name" 2>/dev/null | jq -r -s ".[] | sort_by(.createTime) | reverse | [ .[] | select(.bondId == \"$CERC_REGISTRY_BOND_ID\") ] | .[0].attributes.version" | awk -F. -v OFS=. '{$NF += 1 ; print}')
