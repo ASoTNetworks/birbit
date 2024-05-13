@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - '*'
 
 env:
   CERC_REGISTRY_USER_KEY: ${{ secrets.CICD_LACONIC_USER_KEY }}
@@ -20,14 +21,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18 # though you need version 14 with geojson
-      - name: "Install exiftool"
-        run: |
-          apt-get update -y
-          apt-get upgrade -y
-          apt-get install exiftool -y
-      - name: "Exiftool Version"
-        run: |
-          exiftool -ver
+     # - name: "Install exiftool"
+      #  run: |
+       #   apt-get update -y
+        #  apt-get upgrade -y
+         # apt-get install exiftool -y
+      #- name: "Exiftool Version"
+       # run: |
+        #  exiftool -ver
       - name: "Install Yarn"
         run: npm install -g yarn
       - name: "Install registry CLI"
@@ -38,7 +39,7 @@ jobs:
         uses: dcarbone/install-jq-action@v2.1.0
       - name: "Publish App Record"
         run: scripts/publish-app-record.sh
-      - name: "Create Metadata Record"
-        run: scripts/create-metadata-record.sh
-          #- name: "Request Deployment"
-        #run: scripts/request-app-deployment.sh
+      #- name: "Create Metadata Record"
+       # run: scripts/create-metadata-record.sh
+      - name: "Request Deployment"
+        run: scripts/request-app-deployment.sh
