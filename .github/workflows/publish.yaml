@@ -41,5 +41,5 @@ jobs:
         run: scripts/publish-app-record.sh
       #- name: "Create Metadata Record"
        # run: scripts/create-metadata-record.sh
-          #- name: "Request Deployment"
-        #run: scripts/request-app-deployment.sh
+      - name: "Request Deployment"
+        run: scripts/request-app-deployment.sh
