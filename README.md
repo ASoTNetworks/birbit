@@ -6,4 +6,4 @@ This example used [`next-pwa`](https://github.com/shadowwalker/next-pwa) to crea
 
 (Under construction)
 
-trigger
+triggered
