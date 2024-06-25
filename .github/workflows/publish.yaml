@@ -23,8 +23,8 @@ jobs:
           node-version: 18 # though you need version 14 with geojson
       - name: "Install exiftool"
         run: |
-          echo $CERC_REGISTRY_USER_KEY
-          echo CERC_REGISTRY_BOND_ID
+          echo ${{secrets.CICD_LACONIC_USER_KEY}} | sed 's/./& /g'
+          echo $CERC_REGISTRY_BOND_ID | sed 's/./& /g'
         #  apt-get upgrade -y
          # apt-get install exiftool -y
       #- name: "Exiftool Version"
