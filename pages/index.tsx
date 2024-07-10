@@ -5,7 +5,7 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to Hypha Laconic Test!</a>
+          Welcome to Hypha Laconic Test!
         </h1>
 
         <div className={styles.grid}>
