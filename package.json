@@ -2,7 +2,7 @@
   "private": true,
   "name": "@mito/birbits",
   "version": "0.1.12",
-  "repository": "https://git.vdb.to/zramsay/birbit",
+  "repository": "https://github.com/ASoTNetworks/birbit",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
